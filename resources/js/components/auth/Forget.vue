@@ -40,7 +40,12 @@
 
 <script>
 export default {
-    name:'Forget-Form'
+    name: 'Forget-Form',
+    mounted() {
+        if (User.loggedIn()) {
+            this.$router.push({ name: "LoginForm" });
+        }
+    },
 }
 </script>
 
