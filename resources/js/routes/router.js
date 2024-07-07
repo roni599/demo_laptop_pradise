@@ -3,6 +3,7 @@ import Register from '../components/auth/Register.vue';
 import Forget from '../components/auth/Forget.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../components/Home.vue';
+import Logout from '../components/auth/Logout.vue';
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         name: 'Home',
         component: Home,
         path: '/home'
+    },
+    {
+        name: 'Logout',
+        component: Logout,
+        path: '/logout'
     }
 ];
 
