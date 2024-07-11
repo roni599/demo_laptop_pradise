@@ -92,7 +92,8 @@
                 </div>
                 <div class="col-md-1">
                   <div class="form-floating mb-3 mb-md-0">
-                    <img :src="form.image" alt="" width="55" height="55">
+                    <!-- <img :src="form.image" alt="" width="55" height="55"> -->
+                    <img :src="form.image" width="55" height="55" />
                   </div>
                 </div>
               </div>
@@ -130,7 +131,7 @@ export default {
         salary: null,
         join_date: null,
         nid: null,
-        image: null
+        image: '/backend/assets/img/pic.jpeg'
       },
       errors: {}
     }
@@ -139,7 +140,7 @@ export default {
 
     onFileSelect(event) {
       let file = event.target.files[0]
-      if (file.size > 1048770) {
+      if (file.size > 1048576) {
         Toast.fire({
           icon: "warning",
           title: "image must be less then 1 mb!"
@@ -157,13 +158,13 @@ export default {
     async employee_create() {
       await axios.post('/api/employees/store', this.form)
         .then((res) => {
-          console.log(res)
-          // User.responseAfterLogin(res);
-          // Toast.fire({
-          //   icon: "success",
-          //   title: "Signed in successfully"
-          // });
-          // this.$router.push({ name: 'Home' })
+          this.form=''
+          console.log(res.data.message)
+          Toast.fire({
+            icon: "success",
+            title: res.data.message
+          });
+          this.$router.push({ name: 'All_employee' })
         })
         .catch((error) => {
           this.errors = error.response.data.errors
