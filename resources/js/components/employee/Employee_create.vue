@@ -158,7 +158,7 @@ export default {
     async employee_create() {
       await axios.post('/api/employees/store', this.form)
         .then((res) => {
-          this.form=''
+          this.form = ''
           console.log(res.data.message)
           Toast.fire({
             icon: "success",
