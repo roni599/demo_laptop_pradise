@@ -4,6 +4,8 @@ import Forget from '../components/auth/Forget.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../components/Home.vue';
 import Logout from '../components/auth/Logout.vue';
+import Employee_create from '../components/employee/Employee_create.vue';
+import All_employee from '../components/employee/All_employee.vue';
 
 const routes = [
     {
@@ -30,7 +32,17 @@ const routes = [
         name: 'Logout',
         component: Logout,
         path: '/logout'
-    }
+    },
+    {
+        name: 'Employee_create',
+        component: Employee_create,
+        path: '/employee_create'
+    },
+    {
+        name: 'All_employee',
+        component: All_employee,
+        path: '/all_employee'
+    },
 ];
 
 const router = createRouter({

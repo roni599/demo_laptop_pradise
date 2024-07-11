@@ -1,10 +1,12 @@
 <template>
   <div class="container-fluid px-4">
-    <h1 class="mt-4">Dashboard</h1>
-    <ol class="breadcrumb mb-4">
-      <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
-    <div class="row">
+    <div class="card mt-4">
+      <div class="card-header border-bottom-0 p-3">
+        <router-link class="text-decoration-none h5" to="/home">Dashboard</router-link><span class="text-muted h5"> /
+          Overview</span>
+      </div>
+    </div>
+    <div class="row mt-4">
       <div class="col-xl-3 col-md-6">
         <div class="card bg-primary text-white mb-4">
           <div class="card-body">Primary Card</div>
