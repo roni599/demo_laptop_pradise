@@ -92,7 +92,6 @@
                 </div>
                 <div class="col-md-1">
                   <div class="form-floating mb-3 mb-md-0">
-                    <!-- <img :src="form.image" alt="" width="55" height="55"> -->
                     <img :src="form.image" width="55" height="55" />
                   </div>
                 </div>
@@ -150,6 +149,7 @@ export default {
         let reader = new FileReader();
         reader.onload = (event) => {
           this.form.image = event.target.result;
+          console.log(this.form.image)
         }
         reader.readAsDataURL(file);
       }

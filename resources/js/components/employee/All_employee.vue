@@ -1,158 +1,3 @@
-<!-- <template>
-  <div class="container">
-    <div class="card mt-4 mb-3">
-      <div class="card-header border-bottom-0 p-3">
-        <router-link class="text-decoration-none" to="/home">Dashboard</router-link><span class="text-muted"> / All
-          Employee</span>
-      </div>
-    </div>
-
-    <div class="card mb-4">
-      <div class="card-header d-flex justify-content-between">
-        <div class="employee_table">
-          <i class="fas fa-table me-1"></i>
-          Employee Table
-        </div>
-        <div class="addNew">
-          <router-link to="/employee_create" class="btn btn-sm btn-success">Add New</router-link>
-        </div>
-      </div>
-      <div class="card-body">
-        <input type="text" id="searchInput" v-model="searchEmployee" placeholder="Search for ID..">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Phone</th>
-              <th scope="col">Address</th>
-              <th scope="col">Join date</th>
-              <th scope="col">Salary</th>
-              <th scope="col">Image</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="employee in filteredEmployees" :key="employee.id">
-              <th scope="row">{{ employee.id }}</th>
-              <td>{{ employee.name }}</td>
-              <td>{{ employee.email }}</td>
-              <td>{{ employee.phone }}</td>
-              <td>{{ employee.address }}</td>
-              <td>{{ employee.join_date }}</td>
-              <td>{{ employee.salary }}</td>
-              <td>
-                <img :src="`/backend/images/employee/${employee.image}`" alt="Employee Image" width="55" height="55" />
-              </td>
-              <td>
-                <button type="button" class="btn btn-primary" @click="openEditModal">Edit</button>
-                <button class="btn btn-sm btn-danger mx-2" @click="deleteEmployee(employee.id)">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-
-
-    <div class="modal fade" id="editEmployeeModal" tabindex="-1" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editEmployeeModalLabel">Edit Employee</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</template>
-
-<script>
-import axios from 'axios';
-
-export default {
-  name: "AllEmployee",
-  data() {
-    return {
-      employees: [],
-      searchEmployee: ''
-    };
-  },
-  computed: {
-    filteredEmployees() {
-      return this.employees.filter(employee => {
-        return employee.id.toString().includes(this.searchEmployee) || employee.phone.toString().includes(this.searchEmployee);
-      });
-    }
-  },
-  methods: {
-    fetchEmployees() {
-      axios.get('/api/employees')
-        .then(response => {
-          this.employees = response.data;
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
-    ,
-    async deleteEmployee(id) {
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          await axios.delete('/api/employees/delete/' + id)
-            .then((res) => {
-              this.employees=this.employees.filter((empl)=>{
-                return empl.id!=id;
-              })
-            })
-            .catch((error) => {
-              this.$router.push({name:'All_employee'})
-            })
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success"
-          });
-        }
-      });
-    }
-  },
-  mounted() {
-    if (!User.loggedIn()) {
-      this.$router.push({ name: "LoginForm" });
-    } else {
-      this.fetchEmployees();
-    }
-  }
-};
-</script>
-
-<style scoped>
-#searchInput {
-  background-image: url('/backend/assets/img/searchicon.png');
-  background-position: 10px 12px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-</style> -->
 <template>
   <div class="container">
     <div class="card mt-4 mb-3">
@@ -201,8 +46,12 @@ export default {
                 <img :src="`/backend/images/employee/${employee.image}`" alt="Employee Image" width="55" height="55" />
               </td>
               <td>
-                <button type="button" class="btn btn-primary" @click="openEditModal(employee)">Edit</button>
-                <button class="btn btn-sm btn-danger mx-2" @click="deleteEmployee(employee.id)">Delete</button>
+                <div class="buttonGroup py-2">
+                  <button type="button" class="btn btn-sm btn-success" @click="openEditModal(employee)"><i
+                      class="fa-solid fa-pen-to-square"></i></button>
+                  <button class="btn btn-sm btn-danger mx-2" @click="deleteEmployee(employee.id)"><i
+                      class="fa-solid fa-trash"></i></button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -303,7 +152,7 @@ export default {
                         </div>
                         <div class="col-md-1">
                           <div class="form-floating mb-3 mb-md-0">
-                            <img :src="imagePreview" width="55" height="55" />
+                            <img v-if="form.image !== null" :src="getimageSrc()" alt="" width="55" height="55">
                           </div>
                         </div>
                       </div>
@@ -332,6 +181,7 @@ import axios from 'axios';
 
 export default {
   name: "AllEmployee",
+
   data() {
     return {
       employees: [],
@@ -347,10 +197,10 @@ export default {
         nid: null,
         image: null
       },
-      imagePreview: '/backend/assets/img/pic.jpeg',
       errors: {}
     };
   },
+
   computed: {
     filteredEmployees() {
       return this.employees.filter(employee => {
@@ -358,7 +208,25 @@ export default {
       });
     }
   },
+
   methods: {
+    onFileSelect(event) {
+      let file = event.target.files[0]
+      if (file.size > 1048576) {
+        Toast.fire({
+          icon: "warning",
+          title: "image must be less then 1 mb!"
+        });
+      }
+      else {
+        let reader = new FileReader();
+        reader.onload = (event) => {
+          this.form.image = event.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    },
+
     fetchEmployees() {
       axios.get('/api/employees')
         .then(response => {
@@ -368,28 +236,30 @@ export default {
           console.error(error);
         });
     },
+
     openEditModal(employee) {
       this.form = { ...employee };
+      console.log(this.form.image)
       let myModal = new bootstrap.Modal(document.getElementById('editEmployeeModal'), {});
       myModal.show();
     },
-    onFileSelect(event) {
-      let file = event.target.files[0];
-      if (file.size > 1048770) {
-        alert("Image must be less than 1 MB!");
-      } else {
-        let reader = new FileReader();
-        reader.onload = (e) => {
-          this.form.image = e.target.result;
-        };
-        reader.readAsDataURL(file);
+
+    getimageSrc() {
+      if (this.form.image) {
+        if (this.form.image.startsWith('data')) {
+          return this.form.image;
+        }
+        else {
+          return `/backend/images/employee/${this.form.image}`;
+        }
       }
+      return '';
     },
+
     async updateEmployee() {
       await axios.put('/api/employees/update/' + this.form.id, this.form)
         .then((res) => {
           alert('Employee updated successfully');
-          // Refresh the list or perform any other necessary actions
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
@@ -424,6 +294,7 @@ export default {
       });
     }
   },
+
   mounted() {
     if (!User.loggedIn()) {
       this.$router.push({ name: "LoginForm" });
