@@ -33,3 +33,4 @@ Route::group([
 
 Route::get('/employees', [EmployeeController::class, 'index'])->name('all_employee');
 Route::post('/employees/store', [EmployeeController::class, 'store']);
+Route::delete('/employees/delete/{id}', [EmployeeController::class, 'delete']);

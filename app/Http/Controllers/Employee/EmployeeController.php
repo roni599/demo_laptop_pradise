@@ -62,4 +62,17 @@ class EmployeeController extends Controller
 
         return response()->json(['message' => 'Employee created successfully']);
     }
+    public function delete($id)
+    {
+        $employee = Employee::find($id);
+        $image = $employee->image;
+        $image = $employee->image;
+        $imagePath = public_path('backend/images/employee/' . $image);
+        if ($image && file_exists($imagePath)) {
+            unlink($imagePath);
+            $employee->delete();
+        } else {
+            $employee->delete();
+        }
+    }
 }
