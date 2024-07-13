@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Employee\EmployeeController;
+use App\Http\Controllers\Supplier\SupplierController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,12 @@ Route::group([
     Route::post('me', [AuthController::class, 'me']);
 });
 
-Route::get('/employees', [EmployeeController::class, 'index'])->name('all_employee');
+Route::get('/employees', [EmployeeController::class, 'index']);
 Route::post('/employees/store', [EmployeeController::class, 'store']);
 Route::delete('/employees/delete/{id}', [EmployeeController::class, 'delete']);
 Route::put('/employees/update', [EmployeeController::class, 'update']);
+
+Route::get('/suppliers', [SupplierController::class, 'index']);
+Route::post('/suppliers/store', [SupplierController::class, 'store']);
+Route::delete('/suppliers/delete/{id}', [SupplierController::class, 'delete']);
+Route::put('/suppliers/update', [SupplierController::class, 'update']);

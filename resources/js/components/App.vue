@@ -1,6 +1,7 @@
 <template>
     <div class="main">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" v-show="$route.path === '/' || $route.path === '/register' || $route.path === '/forget' ? false : true">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"
+            v-show="$route.path === '/' || $route.path === '/register' || $route.path === '/forget' ? false : true">
             <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
                 <i class="fas fa-bars"></i>
@@ -32,7 +33,8 @@
             </ul>
         </nav>
         <div id="layoutSidenav">
-            <div id="layoutSidenav_nav" v-show="$route.path === '/' || $route.path === '/register' || $route.path === '/forget' ? false : true ">
+            <div id="layoutSidenav_nav"
+                v-show="$route.path === '/' || $route.path === '/register' || $route.path === '/forget' ? false : true">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
@@ -76,16 +78,8 @@
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                                 data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                        data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                        aria-controls="pagesCollapseAuth">
-                                        Add Suppliers
-                                    </a>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                        data-bs-target="#pagesCollapseError" aria-expanded="false"
-                                        aria-controls="pagesCollapseError">
-                                        All Suppliers
-                                    </a>
+                                    <router-link class="nav-link" to="/supplier_create">Add Suppliers</router-link>
+                                    <router-link class="nav-link" to="/all_supplier">All Suppliers</router-link>
                                 </nav>
                             </div>
 
@@ -111,7 +105,8 @@
                     </div>
                 </main>
                 <footer class="py-3 bg-light mt-auto w-100">
-                    <div class="container-fluid" v-show="$route.path === '/' ||$route.path === '/register' || $route.path === '/forget' ? false : true ">
+                    <div class="container-fluid"
+                        v-show="$route.path === '/' || $route.path === '/register' || $route.path === '/forget' ? false : true">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; Your Website 2023</div>
                             <div>
