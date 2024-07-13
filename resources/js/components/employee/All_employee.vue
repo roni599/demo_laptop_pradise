@@ -174,7 +174,6 @@
                           </div>
                         </div>
                       </div>
-
                       <div class="mt-4 mb-0">
                         <div class="d-grid">
                           <button type="submit" class="btn btn-primary btn-block">
@@ -313,6 +312,10 @@ export default {
           this.fetchEmployees()
           let myModal = bootstrap.Modal.getInstance(document.getElementById('editEmployeeModal'));
           myModal.hide();
+          Toast.fire({
+            icon: "success",
+            title: res.data.message
+          });
         })
         .catch((error) => {
           this.errors = error.response.data.errors;

@@ -159,7 +159,6 @@ export default {
       await axios.post('/api/employees/store', this.form)
         .then((res) => {
           this.form = ''
-          console.log(res.data.message)
           Toast.fire({
             icon: "success",
             title: res.data.message
