@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="card-body">
-        <input type="text" id="searchInput" v-model="searchEmployee" placeholder="Search for ID..">
+        <input type="text" id="searchInput" v-model="searchEmployee" placeholder="Search for ID.." />
         <table class="table">
           <thead>
             <tr>
@@ -47,10 +47,12 @@
               </td>
               <td>
                 <div class="buttonGroup py-2">
-                  <button type="button" class="btn btn-sm btn-success" @click="openEditModal(employee)"><i
-                      class="fa-solid fa-pen-to-square"></i></button>
-                  <button class="btn btn-sm btn-danger mx-2" @click="deleteEmployee(employee.id)"><i
-                      class="fa-solid fa-trash"></i></button>
+                  <button type="button" class="btn btn-sm btn-success" @click="openEditModal(employee)">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger mx-2" @click="deleteEmployee(employee.id)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
                 </div>
               </td>
             </tr>
@@ -63,8 +65,10 @@
       aria-hidden="true">
       <div class="modal-dialog full-width-modal mt-5">
         <div class="modal-content">
-          <div class="modal-header ">
-            <h5 class="modal-title" id="editEmployeeModalLabel">Edit Employee</h5>
+          <div class="modal-header">
+            <h5 class="modal-title" id="editEmployeeModalLabel">
+              Edit Employee
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -73,18 +77,20 @@
                 <div class="card rounded-lg">
                   <div class="card-header d-flex justify-content-between align-items-center">
                     <div class="icon_text d-flex gap-2 mt-3">
-                      <p> <i class="fa-solid fa-chart-line"></i></p>
+                      <p><i class="fa-solid fa-chart-line"></i></p>
                       <p class="text-black font-bold">Edit Employee</p>
                     </div>
                   </div>
                   <div class="card-body">
-                    <form @submit.prevent="employee_create" enctype="multipart/form-data">
+                    <form @submit.prevent="updateEmployee" enctype="multipart/form-data">
                       <div class="row mb-3">
                         <div class="col-md-6">
                           <div class="form-floating mb-3 mb-md-0">
                             <input class="form-control" id="inputName" type="text" placeholder="Enter your name"
                               v-model="form.name" />
-                            <small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
+                            <small class="text-danger" v-if="errors.name">{{
+                              errors.name[0]
+                            }}</small>
                             <label for="inputName">Full Name</label>
                           </div>
                         </div>
@@ -92,7 +98,9 @@
                           <div class="form-floating mb-3 mb-md-0">
                             <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com"
                               v-model="form.email" />
-                            <small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
+                            <small class="text-danger" v-if="errors.email">{{
+                              errors.email[0]
+                            }}</small>
                             <label for="inputEmail">Email address</label>
                           </div>
                         </div>
@@ -102,7 +110,9 @@
                           <div class="form-floating mb-3 mb-md-0">
                             <input class="form-control" id="inputAddress" type="text" placeholder="Address"
                               v-model="form.address" />
-                            <small class="text-danger" v-if="errors.address">{{ errors.address[0] }}</small>
+                            <small class="text-danger" v-if="errors.address">{{
+                              errors.address[0]
+                            }}</small>
                             <label for="inputAddress">Address</label>
                           </div>
                         </div>
@@ -110,7 +120,9 @@
                           <div class="form-floating mb-3 mb-md-0">
                             <input class="form-control" id="inputSalary" type="text" placeholder="Salary"
                               v-model="form.salary" />
-                            <small class="text-danger" v-if="errors.salary">{{ errors.salary[0] }}</small>
+                            <small class="text-danger" v-if="errors.salary">{{
+                              errors.salary[0]
+                            }}</small>
                             <label for="inputSalary">Salary</label>
                           </div>
                         </div>
@@ -129,7 +141,9 @@
                           <div class="form-floating mb-3 mb-md-0">
                             <input class="form-control" id="inputNid" type="text" placeholder="NID"
                               v-model="form.nid" />
-                            <small class="text-danger" v-if="errors.nid">{{ errors.nid[0] }}</small>
+                            <small class="text-danger" v-if="errors.nid">{{
+                              errors.nid[0]
+                            }}</small>
                             <label for="inputNid">NID</label>
                           </div>
                         </div>
@@ -140,26 +154,32 @@
                           <div class="form-floating mb-3 mb-md-0">
                             <input class="form-control" id="inputNid" type="text" placeholder="Phone"
                               v-model="form.phone" />
-                            <small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
+                            <small class="text-danger" v-if="errors.phone">{{
+                              errors.phone[0]
+                            }}</small>
                             <label for="inputNid">Phone</label>
                           </div>
                         </div>
                         <div class="col-md-5">
                           <div class="form-floating mb-3 mb-md-0">
                             <input class="form-control p-3 px-4" id="inputFile" type="file" @change="onFileSelect" />
-                            <small class="text-danger" v-if="errors.image">{{ errors.image[0] }}</small>
+                            <small class="text-danger" v-if="errors.image">{{
+                              errors.image[0]
+                            }}</small>
                           </div>
                         </div>
                         <div class="col-md-1">
                           <div class="form-floating mb-3 mb-md-0">
-                            <img v-if="form.image !== null" :src="getimageSrc()" alt="" width="55" height="55">
+                            <img v-if="form.image !== null" :src="getimageSrc()" alt="" width="55" height="55" />
                           </div>
                         </div>
                       </div>
 
                       <div class="mt-4 mb-0">
                         <div class="d-grid">
-                          <button class="btn btn-primary btn-block">Submit</button>
+                          <button type="submit" class="btn btn-primary btn-block">
+                            Submit
+                          </button>
                         </div>
                       </div>
                     </form>
@@ -171,13 +191,11 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
+import axios from "axios";
 
 export default {
   name: "AllEmployee",
@@ -185,7 +203,7 @@ export default {
   data() {
     return {
       employees: [],
-      searchEmployee: '',
+      searchEmployee: "",
       form: {
         id: null,
         name: null,
@@ -195,75 +213,69 @@ export default {
         salary: null,
         join_date: null,
         nid: null,
-        image: null
+        image: null,
       },
-      errors: {}
+      errors: {},
     };
   },
 
   computed: {
     filteredEmployees() {
-      return this.employees.filter(employee => {
-        return employee.id.toString().includes(this.searchEmployee) || employee.phone.toString().includes(this.searchEmployee);
+      return this.employees.filter((employee) => {
+        return (
+          employee.id.toString().includes(this.searchEmployee) ||
+          employee.phone.toString().includes(this.searchEmployee)
+        );
       });
-    }
+    },
   },
 
   methods: {
     onFileSelect(event) {
-      let file = event.target.files[0]
+      let file = event.target.files[0];
       if (file.size > 1048576) {
         Toast.fire({
           icon: "warning",
-          title: "image must be less then 1 mb!"
+          title: "image must be less then 1 mb!",
         });
-      }
-      else {
+      } else {
         let reader = new FileReader();
         reader.onload = (event) => {
           this.form.image = event.target.result;
-        }
+        };
         reader.readAsDataURL(file);
       }
     },
 
     fetchEmployees() {
-      axios.get('/api/employees')
-        .then(response => {
+      axios
+        .get("/api/employees")
+        .then((response) => {
           this.employees = response.data;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     },
 
     openEditModal(employee) {
       this.form = { ...employee };
-      console.log(this.form.image)
-      let myModal = new bootstrap.Modal(document.getElementById('editEmployeeModal'), {});
+      let myModal = new bootstrap.Modal(
+        document.getElementById("editEmployeeModal"),
+        {}
+      );
       myModal.show();
     },
 
     getimageSrc() {
       if (this.form.image) {
-        if (this.form.image.startsWith('data')) {
+        if (this.form.image.startsWith("data")) {
           return this.form.image;
-        }
-        else {
+        } else {
           return `/backend/images/employee/${this.form.image}`;
         }
       }
-      return '';
-    },
-
-    async updateEmployee() {
-      await axios.put('/api/employees/update/' + this.form.id, this.form)
-        .then((res) => {
-          alert('Employee updated successfully');
-        })
-        .catch((error) => {
-          this.errors = error.response.data.errors;
-        });
+      return "";
     },
     async deleteEmployee(id) {
       Swal.fire({
@@ -273,25 +285,38 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          await axios.delete('/api/employees/delete/' + id)
+          await axios
+            .delete("/api/employees/delete/" + id)
             .then((res) => {
               this.employees = this.employees.filter((empl) => {
                 return empl.id != id;
               });
             })
             .catch((error) => {
-              this.$router.push({ name: 'All_employee' });
+              this.$router.push({ name: "All_employee" });
             });
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
-            icon: "success"
+            icon: "success",
           });
         }
       });
+    },
+
+    async updateEmployee() {
+      await axios.put('/api/employees/update', this.form)
+        .then((res) => {
+          this.fetchEmployees()
+          let myModal = bootstrap.Modal.getInstance(document.getElementById('editEmployeeModal'));
+          myModal.hide();
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
     }
   },
 
@@ -301,13 +326,13 @@ export default {
     } else {
       this.fetchEmployees();
     }
-  }
+  },
 };
 </script>
 
 <style scoped>
 #searchInput {
-  background-image: url('/backend/assets/img/searchicon.png');
+  background-image: url("/backend/assets/img/searchicon.png");
   background-position: 10px 12px;
   background-repeat: no-repeat;
   width: 100%;
