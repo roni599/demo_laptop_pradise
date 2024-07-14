@@ -28,7 +28,7 @@
                                             placeholder="Enter your name" v-model="form.name" />
                                         <small class="text-danger" v-if="errors.name">{{
                                             errors.name[0]
-                                            }}</small>
+                                        }}</small>
                                         <label for="inputName">Full Name</label>
                                     </div>
                                 </div>
@@ -38,7 +38,7 @@
                                             placeholder="name@example.com" v-model="form.email" />
                                         <small class="text-danger" v-if="errors.email">{{
                                             errors.email[0]
-                                            }}</small>
+                                        }}</small>
                                         <label for="inputEmail">Email address</label>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                             v-model="form.address" />
                                         <small class="text-danger" v-if="errors.address">{{
                                             errors.address[0]
-                                            }}</small>
+                                        }}</small>
                                         <label for="inputAddress">Address</label>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                             v-model="form.phone" />
                                         <small class="text-danger" v-if="errors.phone">{{
                                             errors.phone[0]
-                                            }}</small>
+                                        }}</small>
                                         <label for="inputPhone">Phone</label>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                             placeholder="Shop Name" v-model="form.shopname" />
                                         <small class="text-danger" v-if="errors.shopname">{{
                                             errors.shopname[0]
-                                            }}</small>
+                                        }}</small>
                                         <label for="inputNid">Shop Name</label>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                                             @change="onFileSelect" />
                                         <small class="text-danger" v-if="errors.image">{{
                                             errors.image[0]
-                                            }}</small>
+                                        }}</small>
                                     </div>
                                 </div>
                                 <div class="col-md-1">

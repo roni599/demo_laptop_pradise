@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Supplier\SupplierController;
 use Illuminate\Http\Request;
@@ -41,3 +42,8 @@ Route::get('/suppliers', [SupplierController::class, 'index']);
 Route::post('/suppliers/store', [SupplierController::class, 'store']);
 Route::delete('/suppliers/delete/{id}', [SupplierController::class, 'delete']);
 Route::put('/suppliers/update', [SupplierController::class, 'update']);
+
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::post('/categories/store', [CategoryController::class, 'store']);
+Route::delete('/categories/delete/{id}', [CategoryController::class, 'delete']);
+Route::put('/categories/update', [CategoryController::class, 'update']);

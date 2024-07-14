@@ -66,7 +66,8 @@
                             </div>
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                data-bs-target="#collapseSuppliers" aria-expanded="false"
+                                aria-controls="collapseSuppliers">
                                 <div class="sb-nav-link-icon">
                                     <i class="fas fa-book-open"></i>
                                 </div>
@@ -75,11 +76,31 @@
                                     <i class="fas fa-angle-down"></i>
                                 </div>
                             </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+                            <div class="collapse" id="collapseSuppliers" aria-labelledby="headingTwo"
                                 data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <router-link class="nav-link" to="/supplier_create">Add Suppliers</router-link>
                                     <router-link class="nav-link" to="/all_supplier">All Suppliers</router-link>
+                                </nav>
+                            </div>
+
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#collapseCategories" aria-expanded="false"
+                                aria-controls="collapseCategories">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </div>
+                                Categories
+                                <div class="sb-sidenav-collapse-arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </div>
+                            </a>
+                            <div class="collapse" id="collapseCategories" aria-labelledby="headingTwo"
+                                data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <router-link class="nav-link" to="/category_create">Add Categories</router-link>
+                                    <router-link class="nav-link" to="/all_category">All Category</router-link>
                                 </nav>
                             </div>
 

@@ -12,6 +12,9 @@ import All_employee from '../components/employee/All_employee.vue';
 import Supplier_create from '../components/supplier/Supplier_create.vue';
 import All_supplier from '../components/supplier/All_supplier.vue';
 
+import Category_create from '../components/category/Category_create.vue';
+import All_category from '../components/category/All_category.vue';
+
 const routes = [
     { name: 'LoginForm', component: Login, path: '/' },
     { name: 'RegisterForm', component: Register, path: '/register' },
@@ -24,6 +27,9 @@ const routes = [
 
     { name: 'Supplier_create', component: Supplier_create, path: '/supplier_create' },
     { name: 'All_supplier', component: All_supplier, path: '/all_supplier' },
+
+    { name: 'Category_create', component: Category_create, path: '/category_create' },
+    { name: 'All_category', component: All_category, path: '/all_category' },
 ];
 
 const router = createRouter({
