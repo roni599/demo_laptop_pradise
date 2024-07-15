@@ -104,6 +104,24 @@
                                 </nav>
                             </div>
 
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#collapseProducts" aria-expanded="false"
+                                aria-controls="collapseProducts">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fa-brands fa-shopify"></i>
+                                </div>
+                                Products
+                                <div class="sb-sidenav-collapse-arrow">
+                                </div>
+                            </a>
+                            <div class="collapse" id="collapseProducts" aria-labelledby="headingTwo"
+                                data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <router-link class="nav-link" to="/product_create">Add Product</router-link>
+                                    <router-link class="nav-link" to="/all_product">All Products</router-link>
+                                </nav>
+                            </div>
+
                             <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon">

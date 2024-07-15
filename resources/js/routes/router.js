@@ -15,6 +15,9 @@ import All_supplier from '../components/supplier/All_supplier.vue';
 import Category_create from '../components/category/Category_create.vue';
 import All_category from '../components/category/All_category.vue';
 
+import Product_create from '../components/product/Product_create.vue';
+import All_product from '../components/product/All_product.vue';
+
 const routes = [
     { name: 'LoginForm', component: Login, path: '/' },
     { name: 'RegisterForm', component: Register, path: '/register' },
@@ -30,6 +33,9 @@ const routes = [
 
     { name: 'Category_create', component: Category_create, path: '/category_create' },
     { name: 'All_category', component: All_category, path: '/all_category' },
+
+    { name: 'Product_create', component: Product_create, path: '/product_create' },
+    { name: 'All_product', component: All_product, path: '/all_product' },
 ];
 
 const router = createRouter({
