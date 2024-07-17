@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('root')->nullable();
             $table->integer('buying_price')->nullable();
             $table->integer('selling_price');
-            $table->integer('buying_date')->nullable();
+            $table->date('buying_date')->nullable();  // Change this to date type
             $table->string('image')->nullable();
             $table->integer('product_quantity');
             $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade');

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Employee\EmployeeController;
+use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Supplier\SupplierController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,3 +48,8 @@ Route::get('/categories', [CategoryController::class, 'index']);
 Route::post('/categories/store', [CategoryController::class, 'store']);
 Route::delete('/categories/delete/{id}', [CategoryController::class, 'delete']);
 Route::put('/categories/update', [CategoryController::class, 'update']);
+
+Route::get('/products', [ProductController::class, 'index']);
+Route::post('/products/store', [ProductController::class, 'store']);
+Route::delete('/products/delete/{id}', [ProductController::class, 'delete']);
+Route::put('/products/update', [ProductController::class, 'update']);
