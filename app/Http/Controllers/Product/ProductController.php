@@ -125,4 +125,18 @@ class ProductController extends Controller
 
         return response()->json(['message' => 'Product updated successfully']);
     }
+    public function stocks_update(Request $request)
+    {
+        $request->validate([
+            'product_quantity' => 'required|integer',
+        ]);
+
+        $product = Product::find($request->id);
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+        $product->product_quantity = $request->product_quantity;
+        $product->save();
+        return response()->json(['message' => 'Stocks updated successfully']);
+    }
 }

@@ -17,6 +17,14 @@ import All_category from '../components/category/All_category.vue';
 
 import Product_create from '../components/product/Product_create.vue';
 import All_product from '../components/product/All_product.vue';
+import Stocks from '../components/product/Stocks.vue';
+
+import Expense_create from '../components/expense/Expense_create.vue';
+import All_expense from '../components/expense/All_expense.vue';
+
+import Customer_create from '../components/customer/Customer_create.vue';
+import All_customers from '../components/customer/All_customers.vue';
+import Pos from '../components/pos/Pos.vue';
 
 const routes = [
     { name: 'LoginForm', component: Login, path: '/' },
@@ -36,6 +44,15 @@ const routes = [
 
     { name: 'Product_create', component: Product_create, path: '/product_create' },
     { name: 'All_product', component: All_product, path: '/all_product' },
+    { name: 'Stocks', component: Stocks, path: '/stocks' },
+
+    { name: 'Expense_create', component: Expense_create, path: '/expense_create' },
+    { name: 'All_expense', component: All_expense, path: '/all_expense' },
+
+    { name: 'Customer_create', component: Customer_create, path: '/customer_create' },
+    { name: 'All_customer', component: All_customers, path: '/all_customer' },
+
+    { name: 'pos', component: Pos, path: '/pos' },
 ];
 
 const router = createRouter({

@@ -29,6 +29,7 @@
                             <th scope="col">Buying Price</th>
                             <th scope="col">Selling Price</th>
                             <th scope="col">Buying Date</th>
+                            <th scope="col">Quentity</th>
                             <th scope="col">Image</th>
                             <th scope="col">Category</th>
                             <th scope="col">Supplier</th>
@@ -44,9 +45,10 @@
                             <td>{{ product.buying_price }}</td>
                             <td>{{ product.selling_price }}</td>
                             <td>{{ product.buying_date }}</td>
+                            <td>{{ product.product_quantity }}</td>
                             <td>
                                 <img :src="`/backend/images/product/${product.image}`" alt="Employee Image" width="55"
-                                    height="55" />
+                                height="55" />
                             </td>
                             <td>{{ product.category.category_name }}</td>
                             <td>{{ product.supplier.name }}</td>
@@ -97,7 +99,7 @@
                                                             v-model="form.product_name" />
                                                         <small class="text-danger" v-if="errors.product_name">{{
                                                             errors.product_name[0]
-                                                            }}</small>
+                                                        }}</small>
                                                         <label for="inputProductName">Product Name</label>
                                                     </div>
                                                 </div>
@@ -107,7 +109,7 @@
                                                             placeholder="Product Code" v-model="form.product_code" />
                                                         <small class="text-danger" v-if="errors.product_code">{{
                                                             errors.product_code[0]
-                                                            }}</small>
+                                                        }}</small>
                                                         <label for="inputEmail">Product Code</label>
                                                     </div>
                                                 </div>
@@ -119,7 +121,7 @@
                                                             placeholder="Root" v-model="form.root" />
                                                         <small class="text-danger" v-if="errors.root">{{
                                                             errors.root[0]
-                                                            }}</small>
+                                                        }}</small>
                                                         <label for="inputRoot">Root</label>
                                                     </div>
                                                 </div>
@@ -129,7 +131,7 @@
                                                             placeholder="Buying Price" v-model="form.buying_price" />
                                                         <small class="text-danger" v-if="errors.buying_price">{{
                                                             errors.buying_price[0]
-                                                            }}</small>
+                                                        }}</small>
                                                         <label for="Buying Price">Buying Price</label>
                                                     </div>
                                                 </div>
@@ -142,7 +144,7 @@
                                                             placeholder="Selling Price" v-model="form.selling_price" />
                                                         <small class="text-danger" v-if="errors.selling_price">{{
                                                             errors.selling_price[0]
-                                                            }}</small>
+                                                        }}</small>
                                                         <label for="inputSellingPrice">Selling Price</label>
                                                     </div>
                                                 </div>
@@ -152,7 +154,7 @@
                                                             placeholder="Buying Date" v-model="form.buying_date" />
                                                         <small class="text-danger" v-if="errors.buying_date">{{
                                                             errors.buying_date[0]
-                                                            }}</small>
+                                                        }}</small>
                                                         <label for="inputBuyingDate">Buying Date</label>
                                                     </div>
                                                 </div>
@@ -169,7 +171,7 @@
                                                         </select>
                                                         <small class="text-danger" v-if="errors.category_id">{{
                                                             errors.category_id[0]
-                                                            }}</small>
+                                                        }}</small>
                                                         <label class="h6 text-black mb-0"
                                                             for="inputCategory">Category</label>
                                                     </div>
@@ -185,7 +187,7 @@
                                                         </select>
                                                         <small class="text-danger" v-if="errors.supplier_id">{{
                                                             errors.supplier_id[0]
-                                                            }}</small>
+                                                        }}</small>
                                                         <label class="h6 text-black mb-0"
                                                             for="inputSupplier">Supplier</label>
                                                     </div>
@@ -199,7 +201,7 @@
                                                             v-model="form.product_quantity" />
                                                         <small class="text-danger" v-if="errors.product_quantity">{{
                                                             errors.product_quantity[0]
-                                                            }}</small>
+                                                        }}</small>
                                                         <label for="inputProductQuentity">Product Quentity</label>
                                                     </div>
                                                 </div>
@@ -209,7 +211,7 @@
                                                             @change="onFileSelect" />
                                                         <small class="text-danger" v-if="errors.image">{{
                                                             errors.image[0]
-                                                            }}</small>
+                                                        }}</small>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-1">

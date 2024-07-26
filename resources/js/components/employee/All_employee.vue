@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <div class="card mb-4">
+    <div class="card mb-4 tt">
       <div class="card-header d-flex justify-content-between">
         <div class="employee_table">
           <i class="fas fa-table me-1"></i>

@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Employee\EmployeeController;
+use App\Http\Controllers\Expense\ExpenseController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Supplier\SupplierController;
 use Illuminate\Http\Request;
@@ -53,3 +55,16 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::post('/products/store', [ProductController::class, 'store']);
 Route::delete('/products/delete/{id}', [ProductController::class, 'delete']);
 Route::put('/products/update', [ProductController::class, 'update']);
+Route::put('/products/stocks/update', [ProductController::class, 'stocks_update']);
+
+Route::get('/expenses', [ExpenseController::class, 'index']);
+Route::post('/expenses/store', [ExpenseController::class, 'store']);
+Route::delete('/expenses/delete/{id}', [ExpenseController::class, 'delete']);
+Route::put('/expenses/update', [ExpenseController::class, 'update']);
+
+Route::get('/customers', [CustomerController::class, 'index']);
+Route::post('/customers/store', [CustomerController::class, 'store']);
+Route::delete('/customers/delete/{id}', [CustomerController::class, 'delete']);
+Route::put('/customers/update', [CustomerController::class, 'update']);
+
+Route::get('/subproducts/{id}', [CustomerController::class, 'subproduct']);

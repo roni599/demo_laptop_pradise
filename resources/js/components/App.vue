@@ -2,7 +2,7 @@
     <div class="main">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"
             v-show="$route.path === '/' || $route.path === '/register' || $route.path === '/forget' ? false : true">
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+            <router-link class="navbar-brand ps-3" to="/home">Laptop Paradise</router-link>
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
                 <i class="fas fa-bars"></i>
             </button>
@@ -39,11 +39,17 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <router-link class="nav-link" to="/home">
+                            <router-link class="nav-link mb-3" to="/home">
                                 <div class="sb-nav-link-icon">
                                     <i class="fas fa-tachometer-alt"></i>
                                 </div>
                                 Dashboard
+                            </router-link>
+                            <router-link class="nav-link bg-danger text-white fw-bold" to="/pos">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fas fa-tachometer-alt text-white"></i>
+                                </div>
+                                POS
                             </router-link>
                             <div class="sb-sidenav-menu-heading">Interface</div>
 
@@ -84,6 +90,25 @@
                                 </nav>
                             </div>
 
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#collapseCustomers" aria-expanded="false"
+                                aria-controls="collapseCustomers">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                Customers
+                                <div class="sb-sidenav-collapse-arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </div>
+                            </a>
+                            <div class="collapse" id="collapseCustomers" aria-labelledby="headingTwo"
+                                data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <router-link class="nav-link" to="/customer_create">Add Customers</router-link>
+                                    <router-link class="nav-link" to="/all_customer">All Customers</router-link>
+                                </nav>
+                            </div>
+
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                                 data-bs-target="#collapseCategories" aria-expanded="false"
@@ -112,6 +137,7 @@
                                 </div>
                                 Products
                                 <div class="sb-sidenav-collapse-arrow">
+                                    <i class="fas fa-angle-down"></i>
                                 </div>
                             </a>
                             <div class="collapse" id="collapseProducts" aria-labelledby="headingTwo"
@@ -122,17 +148,29 @@
                                 </nav>
                             </div>
 
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#collapseExpense" aria-expanded="false"
+                                aria-controls="collapseProducts">
                                 <div class="sb-nav-link-icon">
-                                    <i class="fas fa-chart-area"></i>
+                                    <i class="fa-brands fa-shopify"></i>
                                 </div>
-                                Charts
+                                Expense
+                                <div class="sb-sidenav-collapse-arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </div>
                             </a>
-                            <a class="nav-link" href="tables.html">
+                            <div class="collapse" id="collapseExpense" aria-labelledby="headingTwo"
+                                data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <router-link class="nav-link" to="/expense_create">Add Expense</router-link>
+                                    <router-link class="nav-link" to="/all_expense">All Expense</router-link>
+                                </nav>
+                            </div>
+                            <router-link class="nav-link" to="/stocks">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
+                                Stocks
+                            </router-link>
                         </div>
                     </div>
                 </nav>

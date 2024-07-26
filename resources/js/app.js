@@ -20,6 +20,6 @@ const Toast = Swal.mixin({
         toast.onmouseleave = Swal.resumeTimer;
     }
 });
-window.Toast=Toast;
+window.Toast = Toast;
 
 createApp(App).use(router).mount("#app")
