@@ -56,7 +56,7 @@
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                                 data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon">
-                                    <i class="fas fa-columns"></i>
+                                    <i class="fa-solid fa-elevator"></i>
                                 </div>
                                 Employee
                                 <div class="sb-sidenav-collapse-arrow">
@@ -75,7 +75,7 @@
                                 data-bs-target="#collapseSuppliers" aria-expanded="false"
                                 aria-controls="collapseSuppliers">
                                 <div class="sb-nav-link-icon">
-                                    <i class="fas fa-book-open"></i>
+                                    <i class="fa-solid fa-people-arrows"></i>
                                 </div>
                                 Suppliers
                                 <div class="sb-sidenav-collapse-arrow">
@@ -94,7 +94,7 @@
                                 data-bs-target="#collapseCustomers" aria-expanded="false"
                                 aria-controls="collapseCustomers">
                                 <div class="sb-nav-link-icon">
-                                    <i class="fas fa-book-open"></i>
+                                    <i class="fa-solid fa-user-tie"></i>
                                 </div>
                                 Customers
                                 <div class="sb-sidenav-collapse-arrow">
@@ -153,7 +153,7 @@
                                 data-bs-target="#collapseExpense" aria-expanded="false"
                                 aria-controls="collapseProducts">
                                 <div class="sb-nav-link-icon">
-                                    <i class="fa-brands fa-shopify"></i>
+                                    <i class="fa-solid fa-wallet"></i>
                                 </div>
                                 Expense
                                 <div class="sb-sidenav-collapse-arrow">
