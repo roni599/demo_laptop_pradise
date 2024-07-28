@@ -9,10 +9,8 @@
                             Card
                         </div>
                         <div class="addNew">
-                            <!-- <router-link to="/customer_create" class="btn btn-sm btn-success">Add New</router-link> -->
                             <button type="button" class="btn btn-sm btn-success" @click="openEditModal">
-                                <!-- <i class="fa-solid fa-pen-to-square"></i> -->
-                                Add Customer
+                                Add New Customer
                             </button>
                         </div>
                     </div>
@@ -98,17 +96,13 @@
                 </div>
             </div>
         </div>
-
-
-
-
         <div class="modal fade" id="editCustomerModal" tabindex="-1" aria-labelledby="editCustomerModalLabel"
             aria-hidden="true">
             <div class="modal-dialog full-width-modal mt-5">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editCustomerModalLabel">
-                            Edit Customer
+                            Add New Customer
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -119,7 +113,7 @@
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <div class="icon_text d-flex gap-2 mt-3">
                                             <p><i class="fa-solid fa-chart-line"></i></p>
-                                            <p class="text-black font-bold">Edit Customer</p>
+                                            <p class="text-black font-bold">Add New Customer</p>
                                         </div>
                                     </div>
                                     <div class="card-body">
@@ -296,11 +290,14 @@ export default {
             await axios.post('/api/customers/store', this.form)
                 .then((res) => {
                     this.form = ''
+                    let myModal = bootstrap.Modal.getInstance(
+                        document.getElementById("editCustomerModal")
+                    );
+                    myModal.hide();
                     Toast.fire({
                         icon: "success",
-                        title: res.data.message
+                        title: res.data.message,
                     });
-                    this.$router.push({ name: 'All_customer' })
                 })
                 .catch((error) => {
                     this.errors = error.response.data.errors
