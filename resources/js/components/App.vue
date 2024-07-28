@@ -41,7 +41,7 @@
                             <div class="sb-sidenav-menu-heading">Core</div>
                             <router-link class="nav-link mb-3" to="/home">
                                 <div class="sb-nav-link-icon">
-                                    <i class="fas fa-tachometer-alt"></i>
+                                    <i class="fas fa-home"></i>
                                 </div>
                                 Dashboard
                             </router-link>
@@ -56,7 +56,7 @@
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                                 data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon">
-                                    <i class="fa-solid fa-elevator"></i>
+                                    <i class="fas fa-id-card"></i>
                                 </div>
                                 Employee
                                 <div class="sb-sidenav-collapse-arrow">
@@ -133,7 +133,7 @@
                                 data-bs-target="#collapseProducts" aria-expanded="false"
                                 aria-controls="collapseProducts">
                                 <div class="sb-nav-link-icon">
-                                    <i class="fa-brands fa-shopify"></i>
+                                    <i class="fas fa-shopping-cart"></i>
                                 </div>
                                 Products
                                 <div class="sb-sidenav-collapse-arrow">
