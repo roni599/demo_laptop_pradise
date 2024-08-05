@@ -5,6 +5,7 @@ use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Expense\ExpenseController;
+use App\Http\Controllers\POS\PosController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Supplier\SupplierController;
 use Illuminate\Http\Request;
@@ -68,3 +69,7 @@ Route::delete('/customers/delete/{id}', [CustomerController::class, 'delete']);
 Route::put('/customers/update', [CustomerController::class, 'update']);
 
 Route::get('/subproducts/{id}', [CustomerController::class, 'subproduct']);
+
+Route::get('/addProduct/{id}', [PosController::class, 'addProduct']);
+Route::get('/allPos',[PosController::class, 'allPos']);
+Route::get('/posremove/{id}', [PosController::class, 'posremove']);

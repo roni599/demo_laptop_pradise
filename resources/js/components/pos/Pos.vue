@@ -1,6 +1,12 @@
 <template>
     <div class="container">
-        <div class="row mt-5">
+        <div class="card mt-4 mb-3">
+            <div class="card-header border-bottom-0 p-3">
+                <router-link class="text-decoration-none" to="/home">Dashboard</router-link><span class="text-muted"> /
+                    Point Of Sale</span>
+            </div>
+        </div>
+        <div class="row mt-3 mb-2">
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
@@ -14,7 +20,77 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                        <table class="table mb-3">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Qty</th>
+                                    <th>Unit</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-if="Allposes.length == 0">
+                                    <td colspan="5" class="text-center">No data found</td>
+                                </tr>
+                                <tr v-for="allpos in Allposes" :key="allpos.id">
+                                    <td>{{ allpos.pro_name }}</td>
+                                    <td>
+                                        <input type="text" class="d-inline me-1 quantity_input"
+                                            :value="allpos.pro_quantity">
+                                        <button class="btn btn-sm btn-success p-2 me-1">+</button>
+                                        <button class="btn btn-sm btn-danger p-2">-</button>
+                                    </td>
+                                    <td>{{ allpos.pro_price }}</td>
+                                    <td>{{ allpos.sub_total }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger mx-2"
+                                            @click.prevent="productItemDelete(allpos.id)">
+                                            <i class="fa-solid fa-xmark"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="card-footer">
+                            <ul class="list-group mt-2 mb-4">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Total Quentity:
+                                    <span class="badge text-dark rounded-pill fs-6">12</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Sub Total:
+                                    <span class="badge text-dark rounded-pill fs-6">100000</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Vat:
+                                    <span class="badge text-dark rounded-pill fs-6">5%</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Total:
+                                    <span class="badge text-dark rounded-pill fs-6">120000</span>
+                                </li>
+                            </ul>
+                            <label class="ms-1 mb-1 fw-bold">Customer Name</label>
+                            <select class="form-control mb-2">
+                                <option v-for="customer in customers" :key="customer.id">{{ customer.name }}</option>
+                            </select>
+                            <label class="ms-1 mb-1 fw-bold">Pay</label>
+                            <input type="text" class="form-control mb-2">
+
+                            <label class="ms-1 mb-1 fw-bold">Due</label>
+                            <input type="text" class="form-control mb-2">
+
+                            <label class="ms-1 mb-1 fw-bold">Pay By</label>
+                            <select class="form-control mb-3">
+                                <option value="Hand Cash">Hand Cash</option>
+                                <option value="Cheaque">Cheaque</option>
+                                <option value="Gift Card">Gift Card</option>
+                            </select>
+                            <button type="submit" class="btn btn-success mb-2 w-100">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-7">
@@ -51,11 +127,12 @@
 
                                 <div class="row">
                                     <div class="col-md-3 mb-3 col-6" v-for="product in filteredProducts" :key="product">
-                                        <a href="#" class="text-decoration-none list-unstyled">
+                                        <a href="#" @click.prevent="productby(product.id)"
+                                            class="text-decoration-none list-unstyled">
                                             <div class="card" style="width: 9.5rem;">
                                                 <img :src="`/backend/images/product/${product.image}`"
                                                     alt="Employee Image" height="65" width="65" />
-                                                <div class="card-body">
+                                                <div class="card-body max-height-200">
                                                     <small class="card-title">{{ product.product_name }}</small><br>
                                                     <span v-if="product.product_quantity >= 1">Available({{
                                                         product.product_quantity }})</span>
@@ -80,7 +157,7 @@
                                             <div class="card" style="width: 9.5rem;">
                                                 <img :src="`/backend/images/product/${subCategory.image}`"
                                                     alt="Employee Image" height="65" width="65" />
-                                                <div class="card-body">
+                                                <div class="card-body  max-height-200">
                                                     <small class="card-title">{{ subCategory.product_name }}</small><br>
                                                     <span v-if="subCategory.product_quantity >= 1">Available({{
                                                         subCategory.product_quantity }})</span>
@@ -203,7 +280,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
     name: "POS_vue",
     data() {
@@ -211,6 +287,8 @@ export default {
             products: [],
             categories: [],
             subCategories: [],
+            customers: [],
+            Allposes: [],
             errors: {},
             searchProducts: "",
             searchSubProducts: "",
@@ -222,7 +300,7 @@ export default {
                 nid: null,
                 image: '/backend/assets/img/pic.jpeg'
             },
-            errors: {}
+            errors: {},
         };
     },
     computed: {
@@ -248,6 +326,43 @@ export default {
                 this.products = res.data;
             });
         },
+        async productby(id) {
+            axios.get("/api/addProduct/" + id)
+                .then((res) => {
+                    this.allPoses();
+                    Toast.fire({
+                        icon: "success",
+                        title: res.data.message,
+                    });
+                })
+                .catch((error) => {
+
+                })
+        },
+        async allPoses() {
+            await axios.get('/api/allPos')
+                .then((res) => {
+                    this.Allposes = res.data
+                })
+                .catch((error) => {
+
+                })
+        },
+        async productItemDelete(id) {
+            await axios.get("/api/posremove/" + id)
+                .then((res) => {
+                    this.Allposes = this.Allposes.filter((pos) => {
+                        return pos.id != id;
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: res.data.message,
+                    });
+                })
+                .catch((error) => {
+
+                })
+        },
         async categoriesfetch() {
             await axios.get("/api/categories").then((res) => {
                 this.categories = res.data;
@@ -258,7 +373,9 @@ export default {
                 .then((res) => {
                     this.subCategories = res.data
                 })
-                .catch();
+                .catch((error) => {
+                    this.errors = error.response.data.errors
+                })
         },
 
         openEditModal() {
@@ -289,7 +406,14 @@ export default {
         async customer_create() {
             await axios.post('/api/customers/store', this.form)
                 .then((res) => {
-                    this.form = ''
+                    this.form = {
+                        name: null,
+                        email: null,
+                        address: null,
+                        phone: null,
+                        nid: null,
+                        image: '/backend/assets/img/pic.jpeg'
+                    };
                     let myModal = bootstrap.Modal.getInstance(
                         document.getElementById("editCustomerModal")
                     );
@@ -298,15 +422,28 @@ export default {
                         icon: "success",
                         title: res.data.message,
                     });
+                    this.All_customers();
                 })
                 .catch((error) => {
                     this.errors = error.response.data.errors
                 })
-        }
+        },
+        async All_customers() {
+            axios
+                .get("/api/customers")
+                .then((response) => {
+                    this.customers = response.data;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
     },
     mounted() {
         this.productsfetch();
         this.categoriesfetch();
+        this.All_customers();
+        this.allPoses();
     },
 };
 </script>
@@ -332,5 +469,24 @@ export default {
     width: 60%;
     height: 75vh;
     margin: auto;
+}
+
+.max-height-200 {
+    min-height: 100px;
+    max-height: 90px;
+    max-width: 200px;
+    overflow: hidden;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.quantity_input {
+    max-width: 29px;
+    min-width: 25px;
+    border-radius: 5px;
+    padding: 6px 5px;
+    border: 1px solid black;
 }
 </style>

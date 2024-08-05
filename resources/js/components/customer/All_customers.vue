@@ -265,7 +265,6 @@ export default {
                     await axios
                         .delete("/api/customers/delete/" + id)
                         .then((res) => {
-                            console.log(res);
                             this.customers = this.customers.filter((customer) => {
                                 return customer.id != id;
                             });
