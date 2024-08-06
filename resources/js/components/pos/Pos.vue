@@ -161,7 +161,8 @@
                                 <div class="row">
                                     <div class="col-md-3 mb-3 col-6" v-for="subCategory in filteredSubProducts"
                                         :key="subCategory.id">
-                                        <a href="#" class="text-decoration-none list-unstyled">
+                                        <a href="#" @click.prevent="productby(subCategory.id)"
+                                            class="text-decoration-none list-unstyled">
                                             <div class="card" style="width: 9.5rem;">
                                                 <img :src="`/backend/images/product/${subCategory.image}`"
                                                     alt="Employee Image" height="65" width="65" />
@@ -351,6 +352,32 @@ export default {
             await axios.get('/api/allPos')
                 .then((res) => {
                     this.Allposes = res.data
+                })
+                .catch((error) => {
+
+                })
+        },
+        async increment(id) {
+            await axios.get("/api/posincrement/" + id)
+                .then((res) => {
+                    this.allPoses();
+                    Toast.fire({
+                        icon: "success",
+                        title: res.data.message,
+                    });
+                })
+                .catch((error) => {
+
+                })
+        },
+        async decrement(id) {
+            await axios.get("/api/posdecrement/" + id)
+                .then((res) => {
+                    this.allPoses();
+                    Toast.fire({
+                        icon: "success",
+                        title: res.data.message,
+                    });
                 })
                 .catch((error) => {
 

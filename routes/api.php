@@ -73,3 +73,5 @@ Route::get('/subproducts/{id}', [CustomerController::class, 'subproduct']);
 Route::get('/addProduct/{id}', [PosController::class, 'addProduct']);
 Route::get('/allPos',[PosController::class, 'allPos']);
 Route::get('/posremove/{id}', [PosController::class, 'posremove']);
+Route::get('/posincrement/{id}', [PosController::class, 'posincrement']);
+Route::get('/posdecrement/{id}', [PosController::class, 'posdecrement']);
