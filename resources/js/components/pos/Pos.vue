@@ -38,10 +38,18 @@
                                 <tr v-for="allpos in Allposes" :key="allpos.id">
                                     <td>{{ allpos.pro_name }}</td>
                                     <td>
-                                        <input type="text" class="d-inline me-1 quantity_input"
-                                            :value="allpos.pro_quantity">
-                                        <button class="btn btn-sm btn-success p-2 me-1">+</button>
-                                        <button class="btn btn-sm btn-danger p-2">-</button>
+                                        <div class="d-flex justify-content-start align-items-center">
+                                            <input type="text" class="form-control w-50 me-1 quantity_input"
+                                                :value="allpos.pro_quantity">
+                                            <button @click.prevent="increment(allpos.id)"
+                                                class="btn btn-sm btn-success p-2 me-1">+
+                                            </button>
+                                            <button :disabled="allpos.pro_quantity <= 1"
+                                                @click.prevent="decrement(allpos.id)"
+                                                class="btn btn-sm btn-danger p-2">-
+                                            </button>
+                                        </div>
+
                                     </td>
                                     <td>{{ allpos.pro_price }}</td>
                                     <td>{{ allpos.sub_total }}</td>
@@ -439,11 +447,12 @@ export default {
                 });
         },
     },
-    mounted() {
+    created() {
         this.productsfetch();
         this.categoriesfetch();
-        this.All_customers();
         this.allPoses();
+        this.All_customers();
+
     },
 };
 </script>

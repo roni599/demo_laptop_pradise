@@ -12,14 +12,18 @@ class PosController extends Controller
     public function addProduct(Request $request, $id)
     {
         $product = Product::findOrFail($id);
-
-        $pos = POS::create([
-            'pro_id' => $product->id,
-            'pro_name' => $product->product_name,
-            'pro_quantity' => 1,
-            'pro_price' => $product->selling_price,
-            'sub_total' => $product->selling_price,
-        ]);
+        $pos = Pos::where('pro_id', $id)->first();
+        if ($pos) {
+            $pos->increment('pro_quantity',1);
+        } else {
+            $pos = POS::create([
+                'pro_id' => $product->id,
+                'pro_name' => $product->product_name,
+                'pro_quantity' => 1,
+                'pro_price' => $product->selling_price,
+                'sub_total' => $product->selling_price,
+            ]);
+        }
         return response()->json(['message' => 'product Added successfully']);
     }
     public function allPos()
