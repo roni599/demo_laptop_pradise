@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('extra', function (Blueprint $table) {
+        Schema::create('extras', function (Blueprint $table) {
             $table->id();
-            $table->integer('vat')->default(0)->nullable();
+            $table->integer('vat')->nullable(0);
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
-            $table->string('phone');
-            $table->string('email');
-            $table->string('address');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('extra');
+        Schema::dropIfExists('extras');
     }
 };

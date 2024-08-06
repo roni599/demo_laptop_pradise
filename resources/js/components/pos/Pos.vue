@@ -65,38 +65,42 @@
                             <ul class="list-group mt-2 mb-4">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Total Quentity:
-                                    <span class="badge text-dark rounded-pill fs-6">12</span>
+                                    <span class="badge text-dark rounded-pill fs-6">{{ totalQty }}</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Sub Total:
-                                    <span class="badge text-dark rounded-pill fs-6">100000</span>
+                                    <span class="badge text-dark rounded-pill fs-6">{{ subTotal }}</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Vat:
-                                    <span class="badge text-dark rounded-pill fs-6">5%</span>
+                                    <span class="badge text-dark rounded-pill fs-6">{{ vats.vat }}%</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Total:
-                                    <span class="badge text-dark rounded-pill fs-6">120000</span>
+                                    <span class="badge text-dark rounded-pill fs-6">{{ (subTotal * vats.vat / 100) +
+                                        subTotal }}</span>
                                 </li>
                             </ul>
-                            <label class="ms-1 mb-1 fw-bold">Customer Name</label>
-                            <select class="form-control mb-2">
-                                <option v-for="customer in customers" :key="customer.id">{{ customer.name }}</option>
-                            </select>
-                            <label class="ms-1 mb-1 fw-bold">Pay</label>
-                            <input type="text" class="form-control mb-2">
+                            <form action="" @submit.prevent="createBill">
+                                <label class="ms-1 mb-1 fw-bold">Customer Name</label>
+                                <select class="form-control mb-2" v-model="customer_id">
+                                    <option :value="customer.id" v-for="customer in customers" :key="customer.id">{{ customer.name }}
+                                    </option>
+                                </select>
+                                <label class="ms-1 mb-1 fw-bold">Pay</label>
+                                <input type="text" class="form-control mb-2" v-model="pay">
 
-                            <label class="ms-1 mb-1 fw-bold">Due</label>
-                            <input type="text" class="form-control mb-2">
+                                <label class="ms-1 mb-1 fw-bold">Due</label>
+                                <input type="text" class="form-control mb-2" v-model="due">
 
-                            <label class="ms-1 mb-1 fw-bold">Pay By</label>
-                            <select class="form-control mb-3">
-                                <option value="Hand Cash">Hand Cash</option>
-                                <option value="Cheaque">Cheaque</option>
-                                <option value="Gift Card">Gift Card</option>
-                            </select>
-                            <button type="submit" class="btn btn-success mb-2 w-100">Submit</button>
+                                <label class="ms-1 mb-1 fw-bold">Pay By</label>
+                                <select class="form-control mb-3" v-model="payby">
+                                    <option value="Hand Cash">Hand Cash</option>
+                                    <option value="Cheaque">Cheaque</option>
+                                    <option value="Gift Card">Gift Card</option>
+                                </select>
+                                <button type="submit" class="btn btn-success mb-2 w-100">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -298,6 +302,7 @@ export default {
             subCategories: [],
             customers: [],
             Allposes: [],
+            vats: '',
             errors: {},
             searchProducts: "",
             searchSubProducts: "",
@@ -310,6 +315,11 @@ export default {
                 image: '/backend/assets/img/pic.jpeg'
             },
             errors: {},
+
+            customer_id:'',
+            pay:'',
+            due:'',
+            payby:''
         };
     },
     computed: {
@@ -328,6 +338,20 @@ export default {
                 );
             });
         },
+        totalQty() {
+            let sum = 0;
+            for (let i = 0; i < this.Allposes.length; i++) {
+                sum += (parseFloat(this.Allposes[i].pro_quantity))
+            }
+            return sum;
+        },
+        subTotal() {
+            let sum = 0;
+            for (let i = 0; i < this.Allposes.length; i++) {
+                sum += (parseFloat(this.Allposes[i].pro_quantity)) * parseFloat(this.Allposes[i].pro_price);
+            }
+            return sum;
+        }
     },
     methods: {
         async productsfetch() {
@@ -338,7 +362,7 @@ export default {
         async productby(id) {
             axios.get("/api/addProduct/" + id)
                 .then((res) => {
-                    this.allPoses();
+                    this.allPoseList();
                     Toast.fire({
                         icon: "success",
                         title: res.data.message,
@@ -348,7 +372,7 @@ export default {
 
                 })
         },
-        async allPoses() {
+        async allPoseList() {
             await axios.get('/api/allPos')
                 .then((res) => {
                     this.Allposes = res.data
@@ -360,7 +384,7 @@ export default {
         async increment(id) {
             await axios.get("/api/posincrement/" + id)
                 .then((res) => {
-                    this.allPoses();
+                    this.allPoseList();
                     Toast.fire({
                         icon: "success",
                         title: res.data.message,
@@ -373,7 +397,7 @@ export default {
         async decrement(id) {
             await axios.get("/api/posdecrement/" + id)
                 .then((res) => {
-                    this.allPoses();
+                    this.allPoseList();
                     Toast.fire({
                         icon: "success",
                         title: res.data.message,
@@ -381,6 +405,15 @@ export default {
                 })
                 .catch((error) => {
 
+                })
+        },
+        async vat() {
+            await axios.get("/api/allvat")
+                .then((res) => {
+                    this.vats = res.data;
+                })
+                .catch((error) => {
+                    console.log(error)
                 })
         },
         async productItemDelete(id) {
@@ -473,12 +506,17 @@ export default {
                     console.error(error);
                 });
         },
+
+        createBill(){
+            console.log(this.customer_id,this.pay,this.due,this.payby)
+        }
     },
     created() {
         this.productsfetch();
         this.categoriesfetch();
-        this.allPoses();
+        this.allPoseList();
         this.All_customers();
+        this.vat();
 
     },
 };

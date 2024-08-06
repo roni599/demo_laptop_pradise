@@ -5,6 +5,7 @@ use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Expense\ExpenseController;
+use App\Http\Controllers\Extra\ExtraController;
 use App\Http\Controllers\POS\PosController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Supplier\SupplierController;
@@ -75,3 +76,5 @@ Route::get('/allPos',[PosController::class, 'allPos']);
 Route::get('/posremove/{id}', [PosController::class, 'posremove']);
 Route::get('/posincrement/{id}', [PosController::class, 'posincrement']);
 Route::get('/posdecrement/{id}', [PosController::class, 'posdecrement']);
+
+Route::get('/allvat', [ExtraController::class, 'index']);
