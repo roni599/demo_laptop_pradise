@@ -77,30 +77,33 @@
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Total:
-                                    <span class="badge text-dark rounded-pill fs-6">{{ (subTotal * vats.vat / 100) +
-                                        subTotal }}</span>
+                                    <span class="badge text-dark rounded-pill fs-6">{{ calculateTotal }}</span>
                                 </li>
                             </ul>
-                            <form action="" @submit.prevent="createBill">
+                            <form @submit.prevent="orderDone" enctype="multipart/form-data">
                                 <label class="ms-1 mb-1 fw-bold">Customer Name</label>
                                 <select class="form-control mb-2" v-model="customer_id">
-                                    <option :value="customer.id" v-for="customer in customers" :key="customer.id">{{ customer.name }}
+                                    <option :value="customer.id" v-for="customer in customers" :key="customer.id">
+                                        {{ customer.name }}
                                     </option>
                                 </select>
+
                                 <label class="ms-1 mb-1 fw-bold">Pay</label>
                                 <input type="text" class="form-control mb-2" v-model="pay">
 
                                 <label class="ms-1 mb-1 fw-bold">Due</label>
-                                <input type="text" class="form-control mb-2" v-model="due">
+                                <input type="text" class="form-control mb-2" :value="due" readonly>
 
                                 <label class="ms-1 mb-1 fw-bold">Pay By</label>
                                 <select class="form-control mb-3" v-model="payby">
                                     <option value="Hand Cash">Hand Cash</option>
-                                    <option value="Cheaque">Cheaque</option>
+                                    <option value="Cheque">Cheque</option>
                                     <option value="Gift Card">Gift Card</option>
                                 </select>
-                                <button type="submit" class="btn btn-success mb-2 w-100">Submit</button>
+
+                                <button class="btn btn-success mb-2 w-100">Submit</button>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -315,14 +318,15 @@ export default {
                 image: '/backend/assets/img/pic.jpeg'
             },
             errors: {},
-
-            customer_id:'',
-            pay:'',
-            due:'',
-            payby:''
+            customer_id: '',
+            pay: '',
+            payby: '',
         };
     },
     computed: {
+        due() {
+            return this.calculateTotal - this.pay
+        },
         filteredProducts() {
             return this.products.filter((product) => {
                 return (
@@ -351,6 +355,9 @@ export default {
                 sum += (parseFloat(this.Allposes[i].pro_quantity)) * parseFloat(this.Allposes[i].pro_price);
             }
             return sum;
+        },
+        calculateTotal() {
+            return this.subTotal + (this.subTotal * this.vats.vat / 100);
         }
     },
     methods: {
@@ -506,9 +513,28 @@ export default {
                     console.error(error);
                 });
         },
-
-        createBill(){
-            console.log(this.customer_id,this.pay,this.due,this.payby)
+        async orderDone() {
+            let data = {
+                qty: this.totalQty,
+                subtotal: this.subTotal,
+                vat: this.vats.vat,
+                total: this.calculateTotal,
+                customer_id: this.customer_id,
+                pay: this.pay,
+                due: this.due,
+                payby: this.payby
+            }
+            await axios.post("/api/order", data)
+                .then((res) => {
+                    this.$router.push({ name: "Home" })
+                    Toast.fire({
+                        icon: "success",
+                        title: res.data.message,
+                    });
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
         }
     },
     created() {

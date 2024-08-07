@@ -78,3 +78,4 @@ Route::get('/posincrement/{id}', [PosController::class, 'posincrement']);
 Route::get('/posdecrement/{id}', [PosController::class, 'posdecrement']);
 
 Route::get('/allvat', [ExtraController::class, 'index']);
+Route::post('/order', [ExtraController::class, 'orderDoneCustomer']);

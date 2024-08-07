@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Extra;
 use App\Models\Pos;
 use App\Models\Product;
+use GuzzleHttp\Psr7\Request;
 
 class PosController extends Controller
 {
@@ -58,5 +59,8 @@ class PosController extends Controller
         $pos->sub_total = $totalPrice;
         $pos->save();
         return response()->json(['message' => 'Pos dcrement successfully']);
+    }
+    public function orderDoneCustomer(Request $request){
+        return response()->json($request);
     }
 }
